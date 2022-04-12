@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+	//Singleton
+	public static PlayerMove instance;
 	//variables
 	[SerializeField] private int moveSpeed = 1;
 	//Editor reference
 	[SerializeField] private Rigidbody2D playerRigidbody;
 	[SerializeField] private Animator playerAnimator;
+	[SerializeField] public string transitionName;
 
 	// Start is called before the first frame update
 	void Start() {
-	 
+		//check if the instance already exist
+		if (instance != null && instance != this) {
+			// if exist destroy
+			Destroy(this.gameObject);
+		}
+		else {
+			// if not make this the instance
+			instance = this;
+		}
+	 // Avoid to destroy this game object
+	 DontDestroyOnLoad(this.gameObject);
 	}
 	// Update is called once per frame
 	void Update() {
