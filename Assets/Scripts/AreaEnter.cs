@@ -9,6 +9,7 @@ public class AreaEnter : MonoBehaviour
   void Start()
   {
 	  if (transitionAreaName == PlayerMove.instance.transitionName) {
+	  	// move the player position to this position
 	  	PlayerMove.instance.transform.position = this.transform.position;
 	  }
   }
