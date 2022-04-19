@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// Tile Map
+using UnityEngine.Tilemaps;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -8,10 +10,14 @@ public class PlayerMove : MonoBehaviour
 	public static PlayerMove instance;
 	//variables
 	[SerializeField] private int moveSpeed = 1;
+	private Vector3 bottomLeftEdge;
+	private Vector3 topRightEdge;
 	//Editor reference
+	[SerializeField] Tilemap tileMap;
 	[SerializeField] private Rigidbody2D playerRigidbody;
 	[SerializeField] private Animator playerAnimator;
 	[SerializeField] public string transitionName;
+	
 
 	// Start is called before the first frame update
 	void Start() {
@@ -26,6 +32,9 @@ public class PlayerMove : MonoBehaviour
 		}
 	 // Avoid to destroy this game object
 	 DontDestroyOnLoad(this.gameObject);
+	 // Adjust the Limits of the level
+	 bottomLeftEdge = tileMap.localBounds.min + new Vector3(0.5f, 0.5f, 0);
+	 topRightEdge = tileMap.localBounds.max + new Vector3(-0.5f, -0.5f, 0);
 	}
 	// Update is called once per frame
 	void Update() {
@@ -42,5 +51,11 @@ public class PlayerMove : MonoBehaviour
 		 playerAnimator.SetFloat("LastX", horizontalMovement);
 		 playerAnimator.SetFloat("LastY", verticalMovement);
 	 }
+	 // Avoid the player to move beyond the limits of the tiles
+	 this.transform.position = new Vector3(
+			Mathf.Clamp(this.transform.position.x, bottomLeftEdge.x, topRightEdge.x),
+			Mathf.Clamp(this.transform.position.y, bottomLeftEdge.y, topRightEdge.y),
+			Mathf.Clamp(this.transform.position.z, bottomLeftEdge.z, topRightEdge.z)
+	 );
 	}
 }
