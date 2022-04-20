@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Tile Map
-using UnityEngine.Tilemaps;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,7 +11,6 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 bottomLeftEdge;
 	private Vector3 topRightEdge;
 	//Editor reference
-	[SerializeField] Tilemap tileMap;
 	[SerializeField] private Rigidbody2D playerRigidbody;
 	[SerializeField] private Animator playerAnimator;
 	[SerializeField] public string transitionName;
@@ -32,9 +29,6 @@ public class PlayerMove : MonoBehaviour
 		}
 	 // Avoid to destroy this game object
 	 DontDestroyOnLoad(this.gameObject);
-	 // Adjust the Limits of the level
-	 bottomLeftEdge = tileMap.localBounds.min + new Vector3(0.5f, 0.5f, 0);
-	 topRightEdge = tileMap.localBounds.max + new Vector3(-0.5f, -0.5f, 0);
 	}
 	// Update is called once per frame
 	void Update() {
@@ -57,5 +51,9 @@ public class PlayerMove : MonoBehaviour
 			Mathf.Clamp(this.transform.position.y, bottomLeftEdge.y, topRightEdge.y),
 			Mathf.Clamp(this.transform.position.z, bottomLeftEdge.z, topRightEdge.z)
 	 );
+	}
+	public void SetLimit(Vector3 bottomEdgeToSet, Vector3 topEdgeToSet) {
+		bottomLeftEdge = bottomEdgeToSet;
+		topRightEdge = topEdgeToSet;
 	}
 }
