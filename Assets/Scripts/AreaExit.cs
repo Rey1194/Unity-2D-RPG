@@ -6,27 +6,34 @@ using UnityEngine.SceneManagement;
 
 public class AreaExit : MonoBehaviour
 {
+	// Variables
 	[SerializeField] private string sceneToLoad;
 	[SerializeField] private string transitionName;
 	[SerializeField] AreaEnter theAreaEnter;
+	
   // Start is called before the first frame update
-  void Start()
-  {
+  void Start() {
 	  theAreaEnter.transitionAreaName = this.transitionName;
   }
 
-  // Update is called once per frame
-  void Update()
-  {
-      
-  }
 	// Sent when another object enters a trigger collider attached to this object (2D physics only).
 	protected void OnTriggerEnter2D(Collider2D other)
 	{
+		// Check if collide with the player
 		if (other.CompareTag("Player")) {
-			Debug.Log("Area exit");
+			// trigger the fade_start animation
+			MenuManager.instance.FadeImage();
+			// Set the transition name to this new transition name
 			PlayerMove.instance.transitionName = this.transitionName;
-			SceneManager.LoadScene(sceneToLoad);
+			// Invoke the Coroutine
+			StartCoroutine(LoadSceneCoroutine());
 		}
+	}
+	// IEnumerator to wait for the change of scene
+	IEnumerator LoadSceneCoroutine() {
+		// wait for one second
+		yield return new WaitForSeconds(1f);
+		// then load the new scene
+		SceneManager.LoadScene(sceneToLoad);
 	}
 }
