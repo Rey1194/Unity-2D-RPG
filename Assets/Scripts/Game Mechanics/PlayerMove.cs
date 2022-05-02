@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
 	[SerializeField] private int moveSpeed = 1;
 	private Vector3 bottomLeftEdge;
 	private Vector3 topRightEdge;
+	public bool deactivateMovement = false;
 	//Editor reference
 	[SerializeField] private Rigidbody2D playerRigidbody;
 	[SerializeField] private Animator playerAnimator;
@@ -32,18 +33,27 @@ public class PlayerMove : MonoBehaviour
 	}
 	// Update is called once per frame
 	void Update() {
-	 //Input detection
-	 float horizontalMovement = Input.GetAxis("Horizontal");
-	 float verticalMovement = Input.GetAxis("Vertical");
-	 //Add velocity to the rigidbody multiplied by the move speed variable
-	 playerRigidbody.velocity = new Vector2(horizontalMovement, verticalMovement) * moveSpeed;
+		//Input detection
+		float horizontalMovement = Input.GetAxis("Horizontal");
+		float verticalMovement = Input.GetAxis("Vertical");
+	 // Check if the player can move
+	 if (deactivateMovement == false) {
+		 //Add velocity to the rigidbody multiplied by the move speed variable
+		 playerRigidbody.velocity = new Vector2(horizontalMovement, verticalMovement) * moveSpeed;
+	 }
+	 else {
+			// Set the movement to 0;
+			playerRigidbody.velocity = Vector2.zero;
+	 }
 	 //Change the move animation based on the movement of the blend tree
 	 playerAnimator.SetFloat("MovementX", playerRigidbody.velocity.x);
 	 playerAnimator.SetFloat("MovementY", playerRigidbody.velocity.y);
 	 //Change the idle animation based on the last position of the blend tree
 	 if (horizontalMovement == 1 || horizontalMovement == -1 || verticalMovement == 1 || verticalMovement == -1) {
-		 playerAnimator.SetFloat("LastX", horizontalMovement);
-		 playerAnimator.SetFloat("LastY", verticalMovement);
+		 if (!deactivateMovement) {
+				playerAnimator.SetFloat("LastX", horizontalMovement);
+				playerAnimator.SetFloat("LastY", verticalMovement);
+		 }
 	 }
 	 // Avoid the player to move beyond the limits of the tiles
 	 this.transform.position = new Vector3(
