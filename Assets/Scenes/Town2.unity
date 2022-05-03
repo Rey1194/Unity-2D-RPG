@@ -1199,6 +1199,38 @@ PrefabInstance:
       propertyPath: tileMap
       value: 
       objectReference: {fileID: 473922713}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: maxHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: defence
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: maxMana
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: playerXP
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: currentXP
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: dexterity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: playerName
+      value: Jimmy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057517640180856923, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
+      propertyPath: baselevelXp
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5b55a61aa976a041a804d28c9ff4007, type: 3}
 --- !u!1001 &2523243871443476436
