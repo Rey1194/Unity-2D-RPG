@@ -40,7 +40,7 @@ public class DialogController : MonoBehaviour
 			  		// deactivate the dialog box
 			  		dialogBox.SetActive(false);
 			  		// Allow the player to walk again
-			  		PlayerMove.instance.deactivateMovement = false;
+			  		GameManager.instance.dialogBoxOpen = false;
 		  		}
 		  		else {
 			  		// change the name of the character
@@ -83,7 +83,7 @@ public class DialogController : MonoBehaviour
 		// change the bool value
 		dialogJustStarted = true;
 		// avoid the player to move when the dialog is active
-		PlayerMove.instance.deactivateMovement = true;
+		GameManager.instance.dialogBoxOpen = true;
 	}
 	// check if the dialogox is active
 	public bool isDialogBoxActive(){

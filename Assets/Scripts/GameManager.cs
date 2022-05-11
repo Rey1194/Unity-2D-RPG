@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] PlayerStats[] playerStats;
+	// Singleton
 	public static GameManager instance;
+	// Variables
+	[SerializeField] PlayerStats[] playerStats;
+	public bool gameMenuOpen, dialogBoxOpen;
+	
   // Start is called before the first frame update
   void Start() {
   	if (instance != null && instance != this) {
@@ -20,7 +24,18 @@ public class GameManager : MonoBehaviour
   }
 
   // Update is called once per frame
-  void Update() {
-    
-  }
+	void Update() {
+		// if the menu or the dialog box is open
+		if (gameMenuOpen || dialogBoxOpen) {
+			// player can´t move
+	  	PlayerMove.instance.deactivateMovement = true;
+		}
+		else {
+			PlayerMove.instance.deactivateMovement = false;
+		}
+	}
+  
+	public PlayerStats[] GetPlayerStats() {
+		return playerStats;
+	}
 }
