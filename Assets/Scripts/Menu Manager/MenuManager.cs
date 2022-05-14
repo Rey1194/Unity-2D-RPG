@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
 	// Editor's reference
 	[SerializeField] private Image imageToFade;
 	[SerializeField] private GameObject menuPanel;
-	[SerializeField] private TextMeshProUGUI[] nameText, hpText, manaText, lvlText, xpText;
+	[SerializeField] private TextMeshProUGUI[] nameText, hpText, manaText, xpForNextLevel, xpText;
 	[SerializeField] private Slider[] xpSlider;
 	[SerializeField] private Image[] playerImage;
 	[SerializeField] private GameObject[] characterPanel;
@@ -49,8 +49,31 @@ public class MenuManager : MonoBehaviour
 		playerStats = GameManager.instance.GetPlayerStats();
 		//activate character panels
 		for (int i = 0; i < playerStats.Length; i++) {
+			// Updathe the player UI based on the stats
 			characterPanel[i].SetActive(true);
+			// set the player sprite 
+			playerImage[i].sprite = playerStats[i].characterImage;
+			// set the player name
+			nameText[i].text = playerStats[i].playerName;
+			// set the player current hp
+			hpText[i].text = "HP: " + playerStats[i].currentHP + "/" + playerStats[i].maxHP;
+			// set the player current Mana
+			manaText[i].text = "Mana: " + playerStats[i].currentMana + "/" + playerStats[i].maxMana;
+			// set the player current XP
+			xpText[i].text = "Current XP: " + playerStats[i].currentXP;
+			// set the player xp for next level
+			xpForNextLevel[i].text = playerStats[i].currentXP.ToString() + "/" + playerStats[i].xpForEachLevel[playerStats[i].playerLevel];
+			// set the slider max xp for level up
+			xpSlider[i].maxValue = playerStats[i].xpForEachLevel[playerStats[i].playerLevel];
+			// set the slider current xp for level up
+			xpSlider[i].value = playerStats[i].currentXP;
 		}
+	}
+	
+	// Quit the game
+	public void QuitGame() {
+		Debug.Log("Quitting Game");
+		Application.Quit();
 	}
 	
 	// Method to trigger the animation
