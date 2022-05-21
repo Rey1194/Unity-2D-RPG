@@ -9,11 +9,11 @@ public class PlayerStats : MonoBehaviour
 	// stats variables
 	[SerializeField] int maxLevel = 50;
 	[SerializeField] int baselevelXp;
-	[SerializeField] int dexterity;
-	[SerializeField] int defence;
 	public Sprite characterImage;
-	public int[] xpForEachLevel;
 	public string playerName;
+	public int[] xpForEachLevel;
+	public int defence;
+	public int dexterity;
 	public int playerLevel = 1;
 	public int maxMana;
 	public int currentMana;
