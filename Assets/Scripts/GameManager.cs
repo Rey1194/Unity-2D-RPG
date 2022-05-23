@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
 	public bool gameMenuOpen, dialogBoxOpen;
 	
   // Start is called before the first frame update
-  void Start() {
+	void Start() {
+		// Avoid to duplicate the game manager
   	if (instance != null && instance != this) {
   		Destroy(this.gameObject);
   	}
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
   		instance = this;
   	}
   	DontDestroyOnLoad(this.gameObject);
-  	// Find the references in the editor
+		// Find the Player stats in the scene
   	playerStats = FindObjectsOfType<PlayerStats>();
   }
 
@@ -31,11 +32,13 @@ public class GameManager : MonoBehaviour
 	  	PlayerMove.instance.deactivateMovement = true;
 		}
 		else {
+			// Player can move
 			PlayerMove.instance.deactivateMovement = false;
 		}
 	}
-  
+	// Method to export the player stats
 	public PlayerStats[] GetPlayerStats() {
+		// Return the player stats
 		return playerStats;
 	}
 }

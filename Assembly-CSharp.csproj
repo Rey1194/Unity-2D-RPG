@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Level Manager\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\Menu Manager\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\Game Management\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Game Mechanics\CameraController.cs" />
      <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Level Manager\AreaExit.cs" />
@@ -46,6 +46,8 @@
      <Compile Include="Assets\Scripts\Dialog\DialogHandler.cs" />
      <Compile Include="Assets\Scripts\Game Mechanics\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Game Management\ItemManager.cs" />
+     <Compile Include="Assets\Scripts\Game Management\Inventory.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
