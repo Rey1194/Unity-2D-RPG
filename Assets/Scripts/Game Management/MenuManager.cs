@@ -22,6 +22,9 @@ public class MenuManager : MonoBehaviour
 	// Player stats reference in stas panel
 	[SerializeField] private TextMeshProUGUI statName, statHP, statMana, statDex, statDef;
 	[SerializeField] private Image characterStatImage;
+	// Display items panels reference
+	[SerializeField] private GameObject itemSlotContainer;
+	[SerializeField] private Transform itemSlotContainerParent;
  	private PlayerStats[] playerStats;
 	
 	
@@ -104,6 +107,24 @@ public class MenuManager : MonoBehaviour
 		statDef.text = playerSelected.defence.ToString();
 		// set the character sprite image
 		characterStatImage.sprite = playerSelected.characterImage;
+	}
+	
+	// Update the items inventory Panel
+	public void UpdateInventoryPanel() {
+		// Destroy the items on list before update
+		foreach (Transform itemSlot in itemSlotContainerParent) {
+			// Destroy the items from the canvas 
+			Destroy(itemSlot.gameObject);
+		}
+		// Get the item list from the inventory
+		foreach (ItemManager item in Inventory.instance.GetItemList()) {
+			// Instantiate the item in the rectransform of the item slot from the inventory
+			RectTransform itemSlot = Instantiate( itemSlotContainer, itemSlotContainerParent ).GetComponent<RectTransform>();
+			// Find the item image
+			Image itemImage = itemSlot.Find("ItemImage").GetComponent<Image>();
+			// Set the image of the menu item from the pickup item
+			itemImage.sprite = item.itemsImage;
+		}
 	}
 	
 	// Quit the game

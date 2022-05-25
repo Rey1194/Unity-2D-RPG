@@ -25,4 +25,9 @@ public class Inventory : MonoBehaviour
 		// check the item list to check if the item hsa been added
 		print(itemList.Count);
 	}
+	
+	// Export the item list
+	public List<ItemManager> GetItemList() {
+		return itemList;
+	}
 }
