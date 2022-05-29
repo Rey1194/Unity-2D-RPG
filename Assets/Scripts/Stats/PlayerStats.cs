@@ -22,7 +22,13 @@ public class PlayerStats : MonoBehaviour
 	public int currentXP;
 	public int currentHP;
 	public int maxHP;
-
+	// Equip weapon reference
+	public string equippedWeaponName;
+	public string equippedArmorName;
+	public int weaponPower;
+	public int armorDefence;
+	public ItemManager equipedWeapon, equipedArmor;
+	
   // Start is called before the first frame update
 	void Start() {
 		// Set the instance to this
@@ -61,6 +67,19 @@ public class PlayerStats : MonoBehaviour
 			// set he same value of the max mana
 			currentMana = maxMana;
 		}
+	}
+	
+	// Equip weapon method
+	public void EquipWeapon(ItemManager weaponToEquip) {
+		equipedWeapon = weaponToEquip;
+		equippedWeaponName = equipedWeapon.itemName;
+		weaponPower = equipedWeapon.weaponDexerity;
+	}
+	// Equip armor method
+	public void EquipArmor(ItemManager armorToEquip) {
+		equipedArmor = armorToEquip;
+		equippedArmorName = equipedArmor.itemName;
+		armorDefence = equipedArmor.armorDefence;
 	}
 	
 	// Increase the xp for the level

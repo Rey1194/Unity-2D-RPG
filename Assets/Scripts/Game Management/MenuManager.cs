@@ -20,8 +20,9 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private Image[] playerImage;
 	[SerializeField] private Slider[] xpSlider;
 	// Player stats reference in stas panel
-	[SerializeField] private TextMeshProUGUI statName, statHP, statMana, statDex, statDef;
 	[SerializeField] private Image characterStatImage;
+	[SerializeField] private TextMeshProUGUI statName, statHP, statMana, statDex, statDef, statEquippedWeapon, statEquippedArmor;
+	[SerializeField] private TextMeshProUGUI statWeaponPower, statArmorDefence;
 	// Display items panels reference
 	[SerializeField] private GameObject itemSlotContainer;
 	[SerializeField] private Transform itemSlotContainerParent;
@@ -112,6 +113,14 @@ public class MenuManager : MonoBehaviour
 		statDef.text = playerSelected.defence.ToString();
 		// set the character sprite image
 		characterStatImage.sprite = playerSelected.characterImage;
+		// Set the equiped weapon name
+		statEquippedWeapon.text = playerSelected.equippedWeaponName;
+		// Set the equipped armor name
+		statEquippedArmor.text = playerSelected.equippedArmorName;
+		// set the power text in the panel
+		statWeaponPower.text = playerSelected.weaponPower.ToString();
+		// set the defence in the panel
+		statArmorDefence.text = playerSelected.armorDefence.ToString();
 	}
 	
 	// Update the items inventory Panel

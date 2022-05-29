@@ -36,6 +36,18 @@ public class ItemManager : MonoBehaviour
 				selectedCharacter.AddMana(amountOfAffect);
 			}
 		}
+		else if (itemType == ItemType.Weapon) {
+			if (selectedCharacter.equippedWeaponName != "") {
+				Inventory.instance.AddItem(selectedCharacter.equipedWeapon);
+			}
+			selectedCharacter.EquipWeapon(this);
+		}
+		else if (itemType == ItemType.Armor) {
+			if (selectedCharacter.equippedArmorName != "") {
+				Inventory.instance.AddItem(selectedCharacter.equipedArmor);
+			}
+			selectedCharacter.EquipArmor(this);
+		}
 	}
   
 	// Sent when another object enters a trigger collider attached to this object (2D physics only).
