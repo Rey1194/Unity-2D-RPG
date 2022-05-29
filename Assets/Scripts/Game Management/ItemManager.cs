@@ -10,21 +10,33 @@ public class ItemManager : MonoBehaviour
 	public ItemType itemType;
 	public AffectType affectType;
 	public string itemName, itemDescription;
-	public int valueInCoins;
 	public Sprite itemsImage;
+	public int valueInCoins;
 	public int amountOfAffect;
 	public int weaponDexerity;
 	public int armorDefence;
+	public int amount;
+	public bool isStackable;
 	
-  // Start is called before the first frame update
-  void Start() {
-	  
-  }
-
-  // Update is called once per frame
-  void Update() {
-    
-  }
+	
+	// Use item method
+	public void UseItem(int characterToUseOne) {
+		// Select the caracter from the game manager
+		PlayerStats selectedCharacter = GameManager.instance.GetPlayerStats()[characterToUseOne];
+		// check if the item is a use item
+		if (itemType == ItemType.Item) {
+			// check if the use item is a health potion
+			if (affectType == AffectType.HP) {
+				// call the AddHealth method from the playerStats
+				selectedCharacter.AddHealth(amountOfAffect);
+			}
+			// check if the use item is a mana potion
+			else if (affectType == AffectType.Mana) {
+				// call the AddMana method from the playerStats
+				selectedCharacter.AddMana(amountOfAffect);
+			}
+		}
+	}
   
 	// Sent when another object enters a trigger collider attached to this object (2D physics only).
 	protected void OnTriggerEnter2D(Collider2D other) {
@@ -39,6 +51,7 @@ public class ItemManager : MonoBehaviour
 	
 	// Destroy the gameobject
 	private void SelfDestroy() {
-		Destroy(this.gameObject);
+		//Destroy(this.gameObject);
+		this.gameObject.SetActive(false);
 	}
 }

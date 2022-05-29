@@ -25,8 +25,13 @@ public class MenuManager : MonoBehaviour
 	// Display items panels reference
 	[SerializeField] private GameObject itemSlotContainer;
 	[SerializeField] private Transform itemSlotContainerParent;
+	// Character choise reference
+	[SerializeField] private GameObject characterChoicePanel;
+	[SerializeField] private TextMeshProUGUI[] characterChoiceName;
+	// Miscelaneous variables & references
  	private PlayerStats[] playerStats;
-	
+	public  TextMeshProUGUI itemName, itemDescription;
+	public ItemManager activeItem;
 	
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
 	protected void Start() {
@@ -124,7 +129,58 @@ public class MenuManager : MonoBehaviour
 			Image itemImage = itemSlot.Find("ItemImage").GetComponent<Image>();
 			// Set the image of the menu item from the pickup item
 			itemImage.sprite = item.itemsImage;
+			// Set the text of the menu item form the pickuo item
+			TextMeshProUGUI itemAmountText = itemSlot.Find("ItemText").GetComponent<TextMeshProUGUI>();
+			// check if the item is greater than one
+			if (item.amount > 1) {
+				// convert the amount text to string and display
+				itemAmountText.text = item.amount.ToString();
+			}
+			else {
+				// not show the text
+				itemAmountText.text = "";
+			}
+			// change the text based of the item button pressed
+			itemSlot.GetComponent<ItemButton>().itemOnButton = item;
 		}
+	}
+	
+	// Discard Item method
+	public void DiscardItem() {
+		Inventory.instance.RemoveItem(activeItem);
+		UpdateInventoryPanel();
+	}
+	
+	//Use Item method
+	public void UseItem(int selectedCharacter) {
+		activeItem.UseItem(selectedCharacter);
+		OpenCharacterChoicePanel();
+		DiscardItem();
+	}
+	
+	// Active character choice method
+	public void OpenCharacterChoicePanel() {
+		// Active the character choice panel
+		characterChoicePanel.SetActive(true);
+		// if we have an active item
+		if (activeItem) {
+			// Search for the all players characters in scene
+			for (int i = 0; i < playerStats.Length; i++) {
+				// save the players in variable
+				PlayerStats activePlayer = GameManager.instance.GetPlayerStats()[i];
+				// change the button text for the player name
+				characterChoiceName[i].text = activePlayer.playerName;
+				// if there one or more players in scene
+				bool activePlayerAviable = activePlayer.gameObject.activeInHierarchy;
+				// activate the choice button
+				characterChoiceName[i].transform.parent.gameObject.SetActive(activePlayerAviable);
+			}
+		}
+	}
+	
+	// Deactivate the character choice menu
+	public void CloseCharacterChoicePanel() {
+		characterChoicePanel.SetActive(true);
 	}
 	
 	// Quit the game

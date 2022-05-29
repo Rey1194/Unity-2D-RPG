@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+	// Instance
+	public static PlayerStats instance;
 	// stats variables
 	[SerializeField] int maxLevel = 50;
 	[SerializeField] int baselevelXp;
@@ -22,7 +24,10 @@ public class PlayerStats : MonoBehaviour
 	public int maxHP;
 
   // Start is called before the first frame update
-  void Start() {
+	void Start() {
+		// Set the instance to this
+		instance = this;
+		// set hte max level in the xp for each level
 	  xpForEachLevel = new int[maxLevel];
 	  // Set the base level to the xp for each level
 	  xpForEachLevel[1] = baselevelXp;
@@ -37,7 +42,27 @@ public class PlayerStats : MonoBehaviour
 	void Update() {
   	
 	}
-  
+	// Increase Health
+	public void AddHealth(int amountHpToAdd) {
+		// Add to the current healt the value
+		currentHP += amountHpToAdd;
+		// if the current health is greater than the max health
+		if (currentHP >= maxHP) {
+			// set the same vaule of the max health
+			currentHP = maxHP;
+		}
+	}
+	// Increase mana
+	public void AddMana(int amountManaToAdd) {
+		// add to the current mana value
+		currentMana += amountManaToAdd;
+		// if the current mana is greater than the max mana
+		if (currentMana >= maxMana) {
+			// set he same value of the max mana
+			currentMana = maxMana;
+		}
+	}
+	
 	// Increase the xp for the level
 	public void AddExp(int amountOfExp) {
 		// increase the current adding the value parameter's value
@@ -48,6 +73,23 @@ public class PlayerStats : MonoBehaviour
 			currentXP -= xpForEachLevel[playerLevel];
 			// increase a level
 			playerLevel++;
+			// Increas the dexterity or defence
+			if (playerLevel % 2 == 0){
+				// increase dexterity
+				dexterity++;
+			}
+			else {
+				// increase defence
+				defence++;
+			}
+			// increase the max hp
+			maxHP = Mathf.FloorToInt(maxHP * 1.18f);
+			// restore max health
+			currentHP = maxHP;
+			//  increase max mana
+			maxMana = Mathf.FloorToInt(maxMana * 1.06f);
+			// Restore max mana
+			currentMana = maxMana;
 		}
 	}
 }

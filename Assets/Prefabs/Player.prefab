@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5768599213452222370}
   - component: {fileID: 5768599213452222371}
+  - component: {fileID: 7057517640180856923}
   - component: {fileID: 5768599213452222373}
   - component: {fileID: 5768599213452222375}
   - component: {fileID: 5768599213452222372}
   - component: {fileID: 5768599213452222374}
-  - component: {fileID: 7057517640180856923}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -87,6 +87,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7057517640180856923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768599213452222368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11205a2fd7b2fb2499c13cc194e9ba9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLevel: 50
+  baselevelXp: 0
+  characterImage: {fileID: 0}
+  playerName: 
+  xpForEachLevel: 
+  defence: 0
+  dexterity: 0
+  playerLevel: 1
+  maxMana: 0
+  currentMana: 0
+  currentXP: 0
+  currentHP: 0
+  maxHP: 0
 --- !u!114 &5768599213452222373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,15 +195,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7057517640180856923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5768599213452222368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11205a2fd7b2fb2499c13cc194e9ba9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
