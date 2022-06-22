@@ -100,18 +100,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLevel: 50
-  baselevelXp: 0
-  characterImage: {fileID: 0}
-  playerName: 
+  baselevelXp: 100
+  characterImage: {fileID: -2574567115669916243, guid: d878cabd24c237b409c287e47f18f69c, type: 3}
+  playerName: Jimmy
   xpForEachLevel: 
-  defence: 0
-  dexterity: 0
+  defence: 30
+  dexterity: 10
   playerLevel: 1
-  maxMana: 0
-  currentMana: 0
-  currentXP: 0
-  currentHP: 0
-  maxHP: 0
+  maxMana: 100
+  currentMana: 50
+  currentXP: 36
+  currentHP: 75
+  maxHP: 100
+  equippedWeaponName: 
+  equippedArmorName: 
+  weaponPower: 0
+  armorDefence: 0
+  equipedWeapon: {fileID: 0}
+  equipedArmor: {fileID: 0}
 --- !u!114 &5768599213452222373
 MonoBehaviour:
   m_ObjectHideFlags: 0

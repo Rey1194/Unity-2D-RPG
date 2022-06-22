@@ -36,6 +36,7 @@ public class MenuManager : MonoBehaviour
 	
 	// Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
 	protected void Start() {
+		// Set the instance to this
 		instance = this;
 	}
 	
@@ -54,6 +55,7 @@ public class MenuManager : MonoBehaviour
 		else if (Input.GetKeyDown(KeyCode.M) && menuPanel.activeInHierarchy == true) {
 			// Deactivate the menu
 			menuPanel.SetActive(false);
+			// Close the menu
 			GameManager.instance.gameMenuOpen = false;
 		}
 	}
