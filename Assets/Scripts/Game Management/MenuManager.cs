@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
 	public static MenuManager instance;
 	// Editor's reference
 	[SerializeField] private Image imageToFade;
-	[SerializeField] private GameObject menuPanel;
+	[SerializeField] public GameObject menuPanel;
 	[SerializeField] private GameObject[] statsButtons;
 	[SerializeField] private GameObject[] characterPanel;
 	// player stats references in main menu
