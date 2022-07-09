@@ -3834,7 +3834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1560929400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5015,6 +5015,9 @@ MonoBehaviour:
   - {fileID: 8440579003511102626, guid: bea01f4ec1bcd08449727372cc63a954, type: 3}
   - {fileID: 2377988821108655769, guid: f9d00a0e998d8074f83f5ae04e72039a, type: 3}
   - {fileID: 3418000384527850054, guid: 4709d0d6983142541868140d051b8195, type: 3}
+  currentTurn: 0
+  waitingForTurn: 0
+  UIButtonHolder: {fileID: 1276296169}
 --- !u!4 &1856953979
 Transform:
   m_ObjectHideFlags: 0

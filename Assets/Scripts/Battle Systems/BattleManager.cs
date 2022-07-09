@@ -10,6 +10,9 @@ public class BattleManager : MonoBehaviour
 	[SerializeField] List<BattleCharacters> activeCharacters = new List<BattleCharacters>();
 	[SerializeField] Transform[] playerPositions, enemyPositions;
 	[SerializeField] BattleCharacters[] playerPrefabs, enemiesPrefabs;
+	[SerializeField] int currentTurn;
+	[SerializeField] bool waitingForTurn;
+	[SerializeField] GameObject UIButtonHolder;
   
 	// Start is called before the first frame update
   void Start() {
@@ -23,31 +26,62 @@ public class BattleManager : MonoBehaviour
 	  	Debug.Log("Battle start");
 	  	StartBattle(new string[]{"Enemy1", "Enemy2","Enemy3"});
 	  }
+	  
+	  if (Input.GetKey(KeyCode.N) && isBattleActive) {
+	  	NextTurn();
+	  }
+	  
+	  if (isBattleActive) {
+	  	if (waitingForTurn) {
+	  		if (activeCharacters[currentTurn].GetIsPlayer()) {
+	  			UIButtonHolder.SetActive(true);
+	  		}
+	  		else {
+	  			UIButtonHolder.SetActive(false);
+	  		}
+	  	}
+	  }
   }
   
 	public void StartBattle(string[] enemiesToSpawn) {
-		// se llama al método de configurar batalla
-		SettingUpBattle();
-		// Llama al método que añade a los players
-		AddingPlayer();
-		// Añade los enemigos
+		// Verifica que se haya iniciado una batalla
+		if (!isBattleActive) {
+			// se llama al método de configurar batalla
+			SettingUpBattle();
+			// Llama al método que añade a los players
+			AddingPlayer();
+			// LLama al método que añade a los enemigos
+			AddingEnemies(enemiesToSpawn);
+			// espera por turno
+			waitingForTurn = true;
+			// el turno inicial es aleatorio
+			currentTurn = 0; //Random.Range(0, activeCharacters.Count);
+		}	
+	}
+	
+	private void AddingEnemies(string[] enemiesToSpawn) {
+		// Busca y añade los enemigos
 		for(int i = 0; i < enemiesToSpawn.Length; i++ ) {
+			// si tiene nombre el enemigo
 			if (enemiesToSpawn[i] != "") {
+				// se busca en la lista de los prefabs de enemigos
 				for (int j = 0; j < enemiesPrefabs.Length; j++) {
+					// ve matchea los nombres de los enemigos
 					if (enemiesPrefabs[j].characterName == enemiesToSpawn[i]) {
+						//  se instancia los enemigos en las posiciones de la batalla
 						BattleCharacters newEnemy = Instantiate(
 							enemiesPrefabs[j],
 							enemyPositions[i].position,
 							enemyPositions[i].rotation,
 							enemyPositions[i]
 						);
+						// se los añade a la lista de los personajes activos
 						activeCharacters.Add(newEnemy);
 					}
 				}
 			}
 		}
 	}
-	
 	
 	private void AddingPlayer() {
 		// Buscar a todos los personajes que tengan playerstats 
@@ -90,18 +124,22 @@ public class BattleManager : MonoBehaviour
 	
 	// Método para configurar la batalla
 	private void SettingUpBattle() {
-		// verifica que la escena de batalla esté activa
-		if (!isBattleActive) {
-			isBattleActive = true;
-			GameManager.instance.battleIsActive = true;
-			// mueve la cámara a la posición donde se encuentre la batalla
-			this.transform.position = new Vector3 (
-				Camera.main.transform.position.x,
-				Camera.main.transform.position.y,
-				this.transform.position.z
-			);
-			// se activa la escena de batalla
-			battleScene.SetActive(true);
+		isBattleActive = true;
+		GameManager.instance.battleIsActive = true;
+		// mueve la cámara a la posición donde se encuentre la batalla
+		this.transform.position = new Vector3 (
+			Camera.main.transform.position.x,
+			Camera.main.transform.position.y,
+			this.transform.position.z
+		);
+		// se activa la escena de batalla
+		battleScene.SetActive(true);
+	}
+	
+	private void NextTurn() {
+		currentTurn++;
+		if (currentTurn >= activeCharacters.Count) {
+			currentTurn = 0;
 		}
 	}
 }
