@@ -6,9 +6,12 @@ public class Mage : MonoBehaviour
 {
 	public Transform playerPos;
 	public Transform enemyPos;
+	public Transform bulletPoint;
 	public float playerDistance;
+	public float shootCadency = 15f;
+	private float waitShoot = 0;
 	
-	public GameObject fireBullet;
+	public GameObject fireBall;
 	
     // Start is called before the first frame update
     void Start()
@@ -25,22 +28,28 @@ public class Mage : MonoBehaviour
 		{
 			StartCoroutine(Teleport(2.0f));
 		}
+		
+		if (distance < playerDistance || distance >  -playerDistance)
+		{
+			StartCoroutine(Attack(2.0f));
+		}
     }
 	// Transportarse cerca del jugador
 	private IEnumerator Teleport(float waitTime) 
 	{
 		yield return new WaitForSeconds(waitTime);
 		this.transform.position = new Vector3(
-			playerPos.position.x - 2f, 
+			playerPos.position.x - 3f, 
 			this.transform.position.y, 
 			this.transform.position.z
 		);
-		Debug.Log("Transportado");
+		//Debug.Log("Transportado");
 	}
 	// Atacar al jugador
-	private IEnumerator Attack()
+	private IEnumerator Attack(float waitForShoot)
 	{
-		// instanciar una bola de fuego que se dirija al jugador
-		return null;
+		yield return new WaitForSeconds(waitForShoot);
+		// Crear cadencia de tiro
+		Instantiate(fireBall, bulletPoint.transform.position, Quaternion.identity);
 	}
 }

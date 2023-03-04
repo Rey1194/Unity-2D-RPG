@@ -11,7 +11,8 @@ public class Health : MonoBehaviour
 	{
 		if (collisionInfo.gameObject.tag == enemyTag)
 		{
-			Debug.Log("Player Damage");
+			
+			PlayerController.instance.KnockBack();
 		}
 	}
 }

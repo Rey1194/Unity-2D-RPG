@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public static PlayerController instance;
+	
 	[SerializeField] private float _speed = 1.5f;
 	[SerializeField] private float jumpForce = 2.5f;
+	
 	private float groundCheckRadio = 0.025f;
 	private bool _isGrounded;
 	private bool _facingRight = true;
@@ -14,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private bool canDash = true;
 	private bool isDashing;
 	private bool isAttacking = false;
+	
 	private float dashingPower = 14f;
 	private float dashingTime = 0.2f;
 	private float dashingCooldown = 1f;
@@ -25,14 +29,15 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
 	private TrailRenderer _trail;
-	/*
+	
 	private float knockBackCounter;
 	private float knockBackLenght = 0.25f;
 	private float knockBackForce = 5f;
-	private float bounceForce = 15f;
-	*/
+	//private float bounceForce = 15f;
+	
 	protected void Awake()
 	{
+		instance = this;
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_trail = GetComponent<TrailRenderer>();
 	}
@@ -87,16 +92,31 @@ public class PlayerController : MonoBehaviour
 		if (isDashing == true) {
 			return;
 		}
-		if (isAttacking == false && isDashing == false)
+		
+		if (isAttacking == false && isDashing == false && knockBackCounter <= 0)
 		{
 			// Movement
 			float horizontalVelocity = _movement.normalized.x * _speed;
 			_rigidbody.velocity = new Vector2(horizontalVelocity, _rigidbody.velocity.y);
 		}
+		else
+		{
+			// Dash al atacar xd??
+			knockBackCounter -= Time.deltaTime;
+			if (!_facingRight)
+			{
+				_rigidbody.velocity = new Vector2(-knockBackForce, _rigidbody.velocity.y);
+			}
+			else
+			{
+				_rigidbody.velocity = new Vector2(knockBackForce, _rigidbody.velocity.y);
+			}
+		}
 	}
   
 	protected void LateUpdate()
 	{
+		// Refactoriar esto
 		if ( Input.GetAxisRaw("Horizontal") != 0 && _isGrounded == true && isAttacking == false && isDashing == false) {
 			ChangeAnimationState("run");
 		}
@@ -152,9 +172,14 @@ public class PlayerController : MonoBehaviour
 	}
 	
 	// knockback
-	private void KnockBack()
+	public void KnockBack()
 	{
-		// Implementar el retroceso al ser golpeado
+		knockBackCounter = knockBackLenght;
+		_rigidbody.velocity = new Vector2(0f, knockBackForce);
+		// knockback a la direccion contraria de donde mira
+		// revisar a donde está mirando
+		// añadir fuera horizontal a donde está mirando
+		// similar al dash al atacar xd
 	}
 	
 	private void ChangeAnimationState(string newState)
