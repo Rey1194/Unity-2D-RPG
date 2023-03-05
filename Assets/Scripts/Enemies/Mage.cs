@@ -9,7 +9,7 @@ public class Mage : MonoBehaviour
 	public Transform bulletPoint;
 	public float playerDistance;
 	public float shootCadency = 15f;
-	private float waitShoot = 0;
+	//private float waitShoot = 0;
 	
 	public GameObject fireBall;
 	

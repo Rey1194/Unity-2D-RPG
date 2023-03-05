@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour
 	
 	[SerializeField] private float _speed = 1.5f;
 	[SerializeField] private float jumpForce = 2.5f;
+	[SerializeField] private bool lookRight;
 	
 	private float groundCheckRadio = 0.025f;
 	private bool _isGrounded;
-	private bool _facingRight = true;
 	private string currentState;
 	
 	private bool canDash = true;
@@ -29,17 +29,18 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
 	private TrailRenderer _trail;
+	private SpriteRenderer _spriterender;
 	
 	private float knockBackCounter;
 	private float knockBackLenght = 0.25f;
 	private float knockBackForce = 5f;
-	//private float bounceForce = 15f;
 	
 	protected void Awake()
 	{
 		instance = this;
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_trail = GetComponent<TrailRenderer>();
+		_spriterender = GetComponent<SpriteRenderer>();
 	}
 	
 	void Start()
@@ -59,13 +60,13 @@ public class PlayerController : MonoBehaviour
 			float horizontalInput = Input.GetAxisRaw("Horizontal");
 			_movement = new Vector2(horizontalInput, 0f);
 			// flip
-			if (horizontalInput < 0f && _facingRight == true) 
+			if (horizontalInput < 0f) 
 			{
-				Flip();
+				_spriterender.flipX = true;
 			}
-			else if(horizontalInput >0f && _facingRight == false)
+			else if(horizontalInput >0f)
 			{
-				Flip();
+				_spriterender.flipX = false;
 			}
 		}
 		// Jump
@@ -99,11 +100,11 @@ public class PlayerController : MonoBehaviour
 			float horizontalVelocity = _movement.normalized.x * _speed;
 			_rigidbody.velocity = new Vector2(horizontalVelocity, _rigidbody.velocity.y);
 		}
-		else
+		else if (isAttacking == false)
 		{
-			// Dash al atacar xd??
+			// knockback horizontal
 			knockBackCounter -= Time.deltaTime;
-			if (!_facingRight)
+			if (!_spriterender.flipX)
 			{
 				_rigidbody.velocity = new Vector2(-knockBackForce, _rigidbody.velocity.y);
 			}
@@ -141,7 +142,14 @@ public class PlayerController : MonoBehaviour
 		isDashing = true;
 		float originalGravity = _rigidbody.gravityScale;
 		_rigidbody.gravityScale = 0f;
-		_rigidbody.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
+		if (_spriterender.flipX == true)
+		{
+			_rigidbody.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+		}
+		else if (_spriterender.flipX == false)
+		{
+			_rigidbody.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
+		}
 		_trail.emitting = true;
 		yield return new WaitForSeconds(dashingTime);
 		_trail.emitting = false;
@@ -159,16 +167,17 @@ public class PlayerController : MonoBehaviour
 			_movement = Vector2.zero;
 			_rigidbody.velocity = Vector2.zero;
 		}
+		//  Dash al atacar xd?
+		if (!_spriterender.flipX)
+		{
+			_rigidbody.velocity = new Vector2(knockBackForce, _rigidbody.velocity.y);
+		}
+		else
+		{
+			_rigidbody.velocity = new Vector2(-knockBackForce, _rigidbody.velocity.y);
+		}
 		yield return new WaitForSeconds(0.6f);
 		isAttacking = false;
-	}
-	
-	private void Flip()
-	{
-		_facingRight = !_facingRight;
-		float localScaleX = this.transform.localScale.x;
-		localScaleX = localScaleX * -1f;
-		this.transform.localScale = new Vector3(localScaleX, this.transform.localScale.y, this.transform.localScale.z);
 	}
 	
 	// knockback
@@ -176,12 +185,9 @@ public class PlayerController : MonoBehaviour
 	{
 		knockBackCounter = knockBackLenght;
 		_rigidbody.velocity = new Vector2(0f, knockBackForce);
-		// knockback a la direccion contraria de donde mira
-		// revisar a donde está mirando
-		// añadir fuera horizontal a donde está mirando
-		// similar al dash al atacar xd
+		
 	}
-	
+	// Animator state machine?
 	private void ChangeAnimationState(string newState)
 	{
 		if (currentState == newState) return;
