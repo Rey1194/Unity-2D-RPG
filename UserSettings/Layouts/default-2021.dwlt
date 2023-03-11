@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1366
     height: 677
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: PlayerController.cs
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 10129
+  controlID: 126
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 10130
+  controlID: 74
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 10197
+  controlID: 127
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -245,14 +245,14 @@ MonoBehaviour:
     height: 527
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 13}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
-  - {fileID: 19}
   - {fileID: 13}
+  - {fileID: 19}
   m_Selected: 3
-  m_LastSelected: 2
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: PlayerController.cs
+    m_Text: Mage.cs
     m_Image: {fileID: 0}
     m_Tooltip: 
   m_Pos:
@@ -336,18 +336,18 @@ MonoBehaviour:
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
-  targetAsset: {fileID: 11500000, guid: 21bcea2c580496642a17bfdf7b3b03e3, type: 3}
-  targetAssetGuid: 21bcea2c580496642a17bfdf7b3b03e3
+  targetAsset: {fileID: 11500000, guid: f8b31b38f2a718145831a279278c00e6, type: 3}
+  targetAssetGuid: f8b31b38f2a718145831a279278c00e6
   textEditor:
-    scrollPosition: {x: 0, y: 0}
-    scrollPositionLine: 0
+    scrollPosition: {x: 0, y: 182}
+    scrollPositionLine: 13
     scrollPositionOffset: 0
     searchString: 
     caretPosition:
-      virtualColumn: 69
-      column: 69
-      characterIndex: 34
-      line: 20
+      virtualColumn: 42
+      column: 42
+      characterIndex: 27
+      line: 31
     _selectionStartPosition:
       virtualColumn: 0
       column: 0
@@ -360,10 +360,10 @@ MonoBehaviour:
     yLineOffsets: []
     codeViewRect:
       serializedVersion: 2
-      x: 37
-      y: 0
-      width: 707
-      height: 448
+      x: 30
+      y: 182
+      width: 714
+      height: 462
     tokenTooltip: {fileID: 0}
     argumentsHint: {fileID: 0}
     collapsedRegions: []
@@ -398,8 +398,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 14620000
-      m_LastClickedID: 25108
+      m_SelectedIDs: 
+      m_LastClickedID: 0
       m_ExpandedIDs: 0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -500,10 +500,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1
-    y: 19
+    x: 283
+    y: 73
     width: 769
-    height: 418
+    height: 506
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -727,9 +727,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.30632603, y: 0.6729543, z: -0.01035602}
+    m_Target: {x: -0.9002104, y: -0.14366412, z: -0.031147432}
     speed: 2
-    m_Value: {x: -0.30632603, y: 0.6729543, z: -0.01035602}
+    m_Value: {x: -0.9002104, y: -0.14366412, z: -0.031147432}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -780,9 +780,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 5.9222274
+    m_Target: 7.3354287
     speed: 2
-    m_Value: 5.9222274
+    m_Value: 7.3354287
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Mage.cs
+    m_Text: PlayerController.cs
     m_Image: {fileID: 0}
     m_Tooltip: 
   m_Pos:
@@ -922,23 +922,23 @@ MonoBehaviour:
     x: 283
     y: 73
     width: 769
-    height: 418
+    height: 506
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
-  targetAsset: {fileID: 11500000, guid: f8b31b38f2a718145831a279278c00e6, type: 3}
-  targetAssetGuid: f8b31b38f2a718145831a279278c00e6
+  targetAsset: {fileID: 11500000, guid: 21bcea2c580496642a17bfdf7b3b03e3, type: 3}
+  targetAssetGuid: 21bcea2c580496642a17bfdf7b3b03e3
   textEditor:
-    scrollPosition: {x: 0, y: 0}
-    scrollPositionLine: 0
+    scrollPosition: {x: 0, y: 2184}
+    scrollPositionLine: 156
     scrollPositionOffset: 0
     searchString: 
     caretPosition:
-      virtualColumn: 4
-      column: 4
-      characterIndex: 1
-      line: 12
+      virtualColumn: 32
+      column: 32
+      characterIndex: 29
+      line: 14
     _selectionStartPosition:
       virtualColumn: 0
       column: 0
@@ -951,10 +951,10 @@ MonoBehaviour:
     yLineOffsets: []
     codeViewRect:
       serializedVersion: 2
-      x: 30
-      y: 0
-      width: 714
-      height: 378
+      x: 37
+      y: 2184
+      width: 707
+      height: 448
     tokenTooltip: {fileID: 0}
     argumentsHint: {fileID: 0}
     collapsedRegions: []
@@ -1141,9 +1141,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4c670000
-    m_LastClickedID: 26444
-    m_ExpandedIDs: 000000004a6200004c6200004c6700004e6700005067000052670000
+    m_SelectedIDs: 86660000
+    m_LastClickedID: 26246
+    m_ExpandedIDs: 000000004a6200004c62000086660000886600008a6600008c660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1171,7 +1171,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004a6200004c6200004c6700004e6700005067000052670000
+    m_ExpandedIDs: 000000004a6200004c62000086660000886600008a6600008c660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
