@@ -11,7 +11,6 @@ public class Health : MonoBehaviour
 	{
 		if (collisionInfo.gameObject.tag == enemyTag)
 		{
-			
 			PlayerController.instance.KnockBack();
 		}
 	}

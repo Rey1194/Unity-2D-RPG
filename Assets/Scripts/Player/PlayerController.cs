@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
 			float horizontalInput = Input.GetAxisRaw("Horizontal");
 			_movement = new Vector2(horizontalInput, 0f);
 			// flip
+			// error en el hitbox al voltear el sprite, no se voltea el hitbox
+			// tal vez trabajando con la scale se solucione.
 			if (horizontalInput < 0f) 
 			{
 				_spriterender.flipX = true;
@@ -84,7 +86,6 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetButton("Fire1") && isAttacking == false)
 		{
 			StartCoroutine(Attack());
-			Debug.Log("atacando");
 		}
 	}
 	
@@ -117,7 +118,7 @@ public class PlayerController : MonoBehaviour
   
 	protected void LateUpdate()
 	{
-		// Refactoriar esto
+		// Refactoriar esto - controlador de animaciones
 		if ( Input.GetAxisRaw("Horizontal") != 0 && _isGrounded == true && isAttacking == false && isDashing == false) {
 			ChangeAnimationState("run");
 		}
@@ -170,13 +171,13 @@ public class PlayerController : MonoBehaviour
 		//  Dash al atacar xd?
 		if (!_spriterender.flipX)
 		{
-			_rigidbody.velocity = new Vector2(knockBackForce, _rigidbody.velocity.y);
+			_rigidbody.velocity = new Vector2(knockBackForce * 1.5f, _rigidbody.velocity.y);
 		}
 		else
 		{
-			_rigidbody.velocity = new Vector2(-knockBackForce, _rigidbody.velocity.y);
+			_rigidbody.velocity = new Vector2(-knockBackForce * 1.5f, _rigidbody.velocity.y);
 		}
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(0.3f);
 		isAttacking = false;
 	}
 	
