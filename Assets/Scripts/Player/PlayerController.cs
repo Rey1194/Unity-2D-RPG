@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 	
 	private bool canDash = true;
 	private bool isDashing;
+	private bool facingRight;
 	private bool isAttacking = false;
 	
 	private float dashingPower = 14f;
@@ -60,31 +61,25 @@ public class PlayerController : MonoBehaviour
 			float horizontalInput = Input.GetAxisRaw("Horizontal");
 			_movement = new Vector2(horizontalInput, 0f);
 			// flip
-			// error en el hitbox al voltear el sprite, no se voltea el hitbox
-			// tal vez trabajando con la scale se solucione.
-			if (horizontalInput < 0f) 
-			{
-				_spriterender.flipX = true;
+			if (horizontalInput < 0f && !facingRight) {
+				Flip();
+				
 			}
-			else if(horizontalInput >0f)
-			{
-				_spriterender.flipX = false;
+			else if(horizontalInput >0f && facingRight) {
+				Flip();
 			}
 		}
 		// Jump
 		_isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadio, groundLayer);
-		if (Input.GetButtonDown("Jump") && _isGrounded == true) 
-		{
+		if (Input.GetButtonDown("Jump") && _isGrounded == true) {
 			_rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 		}
 		// Dash
-		if (Input.GetKeyDown(KeyCode.LeftAlt) && canDash == true && _isGrounded == true) 
-		{
+		if (Input.GetKeyDown(KeyCode.LeftAlt) && canDash == true && _isGrounded == true) {
 			StartCoroutine(Dash());
 		}
 		// wanna attack
-		if (Input.GetButton("Fire1") && isAttacking == false)
-		{
+		if (Input.GetButton("Fire1") && isAttacking == false) {
 			StartCoroutine(Attack());
 		}
 	}
@@ -95,22 +90,18 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 		
-		if (isAttacking == false && isDashing == false && knockBackCounter <= 0)
-		{
+		if (isAttacking == false && isDashing == false && knockBackCounter <= 0) {
 			// Movement
 			float horizontalVelocity = _movement.normalized.x * _speed;
 			_rigidbody.velocity = new Vector2(horizontalVelocity, _rigidbody.velocity.y);
 		}
-		else if (isAttacking == false)
-		{
+		else if (isAttacking == false) {
 			// knockback horizontal
 			knockBackCounter -= Time.deltaTime;
-			if (!_spriterender.flipX)
-			{
+			if (!_spriterender.flipX) {
 				_rigidbody.velocity = new Vector2(-knockBackForce, _rigidbody.velocity.y);
 			}
-			else
-			{
+			else {
 				_rigidbody.velocity = new Vector2(knockBackForce, _rigidbody.velocity.y);
 			}
 		}
@@ -169,16 +160,21 @@ public class PlayerController : MonoBehaviour
 			_rigidbody.velocity = Vector2.zero;
 		}
 		//  Dash al atacar xd?
-		if (!_spriterender.flipX)
-		{
-			_rigidbody.velocity = new Vector2(knockBackForce * 1.5f, _rigidbody.velocity.y);
-		}
+		if (!facingRight)
+			_rigidbody.velocity = new Vector2(knockBackForce *  1.5f, _rigidbody.velocity.y);
 		else
-		{
-			_rigidbody.velocity = new Vector2(-knockBackForce * 1.5f, _rigidbody.velocity.y);
-		}
+			_rigidbody.velocity = new Vector2(-knockBackForce *  1.5f, _rigidbody.velocity.y);
+		
 		yield return new WaitForSeconds(0.3f);
 		isAttacking = false;
+	}
+	
+	// flip the character
+	private void Flip() {
+		facingRight = !facingRight;
+		Vector3 playerScale =  this.transform.localScale;
+		playerScale.x *=  -1;
+		this.transform.localScale = playerScale;
 	}
 	
 	// knockback
