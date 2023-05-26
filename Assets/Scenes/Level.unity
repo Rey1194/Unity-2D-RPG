@@ -216,6 +216,11 @@ Transform:
   m_Father: {fileID: 1563442237}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &362223834 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2658300351964793627, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+  m_PrefabInstance: {fileID: 806757164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &486067229
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486067229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.513, y: 0.399, z: -10}
+  m_LocalPosition: {x: 1.83, y: 1.06, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -523,6 +528,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &806757164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2658300351964793617, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_Name
+      value: Enemy Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793621, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658300351964793626, guid: 798d8f9915347a641866809777de7ef2, type: 3}
+      propertyPath: _enemyrigidbody
+      value: 
+      objectReference: {fileID: 362223834}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 798d8f9915347a641866809777de7ef2, type: 3}
 --- !u!1 &1055601474
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +652,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055601474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.513, y: 0.399, z: -10}
+  m_LocalPosition: {x: 1.83, y: 1.06, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3029,7 +3095,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563442231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.513, y: 0.399, z: 0}
+  m_LocalPosition: {x: 1.83, y: 1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

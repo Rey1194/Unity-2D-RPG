@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
 		if (isDashing == true) {
 			return;
 		}
-		
 		if (isAttacking == false) 
 		{
 			// Get the player inputs
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour
 			// flip
 			if (horizontalInput < 0f && !facingRight) {
 				Flip();
-				
 			}
 			else if(horizontalInput >0f && facingRight) {
 				Flip();
@@ -96,9 +94,9 @@ public class PlayerController : MonoBehaviour
 			_rigidbody.velocity = new Vector2(horizontalVelocity, _rigidbody.velocity.y);
 		}
 		else if (isAttacking == false) {
-			// knockback horizontal
+            // knockback horizontal
 			knockBackCounter -= Time.deltaTime;
-			if (!_spriterender.flipX) {
+            if (!facingRight) {
 				_rigidbody.velocity = new Vector2(-knockBackForce, _rigidbody.velocity.y);
 			}
 			else {
@@ -134,14 +132,7 @@ public class PlayerController : MonoBehaviour
 		isDashing = true;
 		float originalGravity = _rigidbody.gravityScale;
 		_rigidbody.gravityScale = 0f;
-		if (_spriterender.flipX == true)
-		{
-			_rigidbody.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-		}
-		else if (_spriterender.flipX == false)
-		{
-			_rigidbody.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
-		}
+        _rigidbody.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
 		_trail.emitting = true;
 		yield return new WaitForSeconds(dashingTime);
 		_trail.emitting = false;
@@ -160,11 +151,11 @@ public class PlayerController : MonoBehaviour
 			_rigidbody.velocity = Vector2.zero;
 		}
 		//  Dash al atacar xd?
-		if (!facingRight)
+		/*if (!facingRight)
 			_rigidbody.velocity = new Vector2(knockBackForce *  1.5f, _rigidbody.velocity.y);
 		else
 			_rigidbody.velocity = new Vector2(-knockBackForce *  1.5f, _rigidbody.velocity.y);
-		
+		*/
 		yield return new WaitForSeconds(0.3f);
 		isAttacking = false;
 	}
@@ -180,11 +171,11 @@ public class PlayerController : MonoBehaviour
 	// knockback
 	public void KnockBack()
 	{
+        // knockback vertical llamado por el Health.cs
 		knockBackCounter = knockBackLenght;
 		_rigidbody.velocity = new Vector2(0f, knockBackForce);
-		
 	}
-	// Animator state machine?
+	// Animator state machine
 	private void ChangeAnimationState(string newState)
 	{
 		if (currentState == newState) return;

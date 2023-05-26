@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-	private Rigidbody2D enemyRB;
+	public Rigidbody2D _enemyrigidbody;
 	private bool _isGrounded;
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private LayerMask groundLayer;
@@ -12,9 +10,9 @@ public class Zombie : MonoBehaviour
 	[SerializeField] private float moveSpeed = 2f;
 	
     // Start is called before the first frame update
-    void Start()
+    void start()
     {
-	    enemyRB = this.GetComponent<Rigidbody2D>();
+	    _enemyrigidbody = this.GetComponent<Rigidbody2D>();
     }
     
     // Update is called once per frame
@@ -29,7 +27,8 @@ public class Zombie : MonoBehaviour
 		
 		if (_isGrounded)
 		{
-			enemyRB.velocity = new Vector2(moveSpeed, 0f);
+			_enemyrigidbody.velocity = new Vector2(moveSpeed, 0f);
 		}
 	}
+    
 }
