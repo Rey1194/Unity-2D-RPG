@@ -74,15 +74,4 @@ public class Mage : MonoBehaviour
 		// Crear cadencia de tiro
 		Instantiate(fireBall, bulletPoint.transform.position, Quaternion.identity);
 	}
-	
-	// Sent when an incoming collider makes contact with this object's collider (2D physics only).
-	protected void OnCollisionEnter2D(Collision2D collisionInfo)
-	{
-		
-	}
-	// Sent when a collider on another object stops touching this object's collider (2D physics only).
-	protected void OnCollisionExit2D(Collision2D collisionInfo)
-	{
-		
-	}
 }

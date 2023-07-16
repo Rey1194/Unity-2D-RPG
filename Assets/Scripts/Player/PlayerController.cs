@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
 	private TrailRenderer _trail;
-	private SpriteRenderer _spriterender;
 	
 	private float knockBackCounter;
 	private float knockBackLenght = 0.25f;
@@ -41,7 +40,6 @@ public class PlayerController : MonoBehaviour
 		instance = this;
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_trail = GetComponent<TrailRenderer>();
-		_spriterender = GetComponent<SpriteRenderer>();
 	}
 	
 	void Start()
@@ -54,7 +52,8 @@ public class PlayerController : MonoBehaviour
 		if (isDashing == true) {
 			return;
 		}
-		if (isAttacking == false) 
+		// flip the character?
+        if (isAttacking == false) 
 		{
 			// Get the player inputs
 			float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -114,7 +113,8 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetAxisRaw("Horizontal") == 0 && _isGrounded == true && isAttacking == false && isDashing == false) {
 			ChangeAnimationState("idle");
 		}
-		if (Input.GetAxisRaw("Horizontal") != 0 && _isGrounded == false && isAttacking == false && isDashing == false || Input.GetAxisRaw("Horizontal") == 0 && _isGrounded == false && isAttacking == false && isDashing == false) {
+		if (Input.GetAxisRaw("Horizontal") != 0 && _isGrounded == false && isAttacking == false && isDashing == false || 
+            Input.GetAxisRaw("Horizontal") == 0 && _isGrounded == false && isAttacking == false && isDashing == false) {
 			ChangeAnimationState("jump");
 		}
 		if (isDashing == true && isAttacking == false) {
@@ -154,8 +154,7 @@ public class PlayerController : MonoBehaviour
 		/*if (!facingRight)
 			_rigidbody.velocity = new Vector2(knockBackForce *  1.5f, _rigidbody.velocity.y);
 		else
-			_rigidbody.velocity = new Vector2(-knockBackForce *  1.5f, _rigidbody.velocity.y);
-		*/
+        _rigidbody.velocity = new Vector2(-knockBackForce *  1.5f, _rigidbody.velocity.y);*/
 		yield return new WaitForSeconds(0.3f);
 		isAttacking = false;
 	}
