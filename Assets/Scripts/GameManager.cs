@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // invocar zombies
         if (Input.GetKeyDown(KeyCode.F)) {
             Instantiate( enemyZombie, 
                 new Vector3(
