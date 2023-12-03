@@ -10,9 +10,13 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera[] _allVirtualCameras;
 
     [Header("Controls for lerping the Y damping during the player jump/fall")]
+    
     private Coroutine _lerpYPanCoroutine;
+    private Coroutine _panCameraCoroutine;
+
     [SerializeField] private float _fallPanAmount = 0.25f;
     [SerializeField] private float _fallPanYTime = 0.35f;
+
     public float _fallSpeedYDampingChangeThreshold = -15f;
 
     public bool IsLerpingYdamping { get; private set; } 
@@ -22,6 +26,7 @@ public class CameraManager : MonoBehaviour
     private CinemachineFramingTransposer _framingTransposer;
 
     private float _normYPanAmount;
+    private Vector2 _startingTrackedObjectOffset;
 
     private void Awake()
     {
@@ -39,6 +44,8 @@ public class CameraManager : MonoBehaviour
         }
 
         _normYPanAmount = _framingTransposer.m_YDamping;
+
+        _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
     }
 
     public void LerpYDamping(bool isPlayerFalling)
@@ -78,4 +85,69 @@ public class CameraManager : MonoBehaviour
 
         IsLerpingYdamping = false;
     }
+
+    public void PanCameraOnContact( float panDistance, float panTime, PanDirection panDirection, bool panToStartingPoint )
+    {
+        _panCameraCoroutine = StartCoroutine(PanCamera(panDistance, panTime, panDirection, panToStartingPoint));
+    }
+
+    private IEnumerator PanCamera(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPoint)
+    {
+        Vector2 endPos = Vector2.zero;
+        Vector2 startingPos = Vector2.zero;
+
+        if (!panToStartingPoint)
+        {
+            switch (panDirection)
+            {
+                case PanDirection.up: endPos = Vector2.up; break;
+                case PanDirection.down: endPos = Vector2.down; break;
+                case PanDirection.left: endPos = Vector2.left; break;
+                case PanDirection.right : endPos = Vector2.right; break;
+            }
+            endPos *= panDistance;
+        }
+        else
+        {
+            startingPos = _framingTransposer.m_TrackedObjectOffset;
+            endPos = _startingTrackedObjectOffset;
+        }
+
+        float elapsedTime = 0f;
+        while (elapsedTime < panTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            Vector3 pantLerp = Vector3.Lerp(startingPos, endPos, (elapsedTime / panTime) );
+            _framingTransposer.m_TrackedObjectOffset = pantLerp;
+
+            yield return null;
+        }
+    }
+
+    public void SwapCameras( CinemachineVirtualCamera cameraFromLeft, CinemachineVirtualCamera cameraFromRight, Vector2 triggerExitDirection )
+    {
+        if (_currentCamera == cameraFromLeft && triggerExitDirection.x >0f)
+        {
+            cameraFromRight.enabled = true;
+
+            cameraFromLeft.enabled = false;
+
+            _currentCamera = cameraFromRight;
+
+            _framingTransposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        }
+        else if (_currentCamera == cameraFromRight && triggerExitDirection.x < 0f)
+        {
+            cameraFromLeft.enabled = true;
+
+            cameraFromRight.enabled = false;
+
+            _currentCamera = cameraFromLeft;
+
+            _framingTransposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        }
+
+    }
+
 }

@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
 	private float _fallSpeedYDampingChangeThreshold;
 	[SerializeField] private GameObject _cameraFollow;
 
-	
 	protected void Awake()
 	{
 		instance = this;
@@ -54,7 +53,6 @@ public class PlayerController : MonoBehaviour
 		_animator = GetComponent<Animator>();
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowObject>();
 		_fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
-
     }
 
 	void Update()
@@ -113,7 +111,6 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Attack());
         }
-
 		// Movement
         if (isAttacking == false && isDashing == false && knockBackCounter <= 0) {
 			float horizontalVelocity = _movement.normalized.x * _speed;
@@ -165,7 +162,6 @@ public class PlayerController : MonoBehaviour
         }
 
         ChangeAnimationState(animationState);
-
     }
 
     private IEnumerator Dash()
@@ -204,10 +200,6 @@ public class PlayerController : MonoBehaviour
 	
 	// flip the character
 	private void Flip() {
-		//facingRight = !facingRight;
-		//Vector3 playerScale =  this.transform.localScale;
-		//playerScale.x *=  -1;
-		//this.transform.localScale = playerScale;
 		if (facingRight)
 		{
 			Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
@@ -224,7 +216,6 @@ public class PlayerController : MonoBehaviour
 			// turn the camera follow object
 			_cameraFollowObject.CallTurn();
         }
-
     }
 	
 	// knockback
