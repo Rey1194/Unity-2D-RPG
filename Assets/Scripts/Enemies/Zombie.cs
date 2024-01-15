@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cinemachine;
 
 public class Zombie : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class Zombie : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float randomValue;
 	[SerializeField] private float selectedValue;
+    
+    [SerializeField] private ScreenShakeProfile profile;
+    public CinemachineImpulseSource impulseSource;
+    
     
     // Awake is called when the script instance is being loaded.
     protected void Awake() {
@@ -23,6 +28,7 @@ public class Zombie : MonoBehaviour
     void start()
     {
 	    _enemyrigidbody = this.GetComponent<Rigidbody2D>();
+        impulseSource = this.GetComponent<CinemachineImpulseSource>();
 
     }
     
@@ -34,6 +40,15 @@ public class Zombie : MonoBehaviour
         if (_isGrounded)
         {
             _enemyrigidbody.velocity = (selectedValue == 2) ? new Vector2(moveSpeed, 0f) : new Vector2(-moveSpeed, 0f);
+        }
+    }
+    
+    protected void OnTriggerEnter2D(Collider2D other) {
+        
+        if (other.gameObject.tag == "Player"){
+            // call the screenshake
+            //CameraShakeManager.instance.CameraShake(impulseSource);
+            CameraShakeManager.instance.ScreenShakeFromProfile(impulseSource, profile);
         }
     }
     
